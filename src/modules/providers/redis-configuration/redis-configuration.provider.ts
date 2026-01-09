@@ -1,6 +1,7 @@
 import { FactoryProvider } from '@nestjs/common';
 import { RedisClientOptions } from '@redis/client';
-export const RedisConfigurationToken = 'teamhive:nestjs:RedisConfigurationToken';
+
+export const RedisConfigurationToken = 'gtindependence:nestjs:RedisConfigurationToken';
 
 export type RedisConfigurationOptions = RedisClientOptions & {expiration?: number; keyPrefix?: string};
 

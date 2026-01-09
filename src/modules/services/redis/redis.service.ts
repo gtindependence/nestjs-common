@@ -33,49 +33,31 @@ export class RedisService {
         this.keyPrefix = this.redisConfiguration.keyPrefix ?? '';
     }
 
-    getValue(key: string, ignorePrefix?: boolean) {
-        return new Promise<any>((resolve, reject) => {
-            this.client.connection.get(`${ignorePrefix ? '' : this.keyPrefix}${key}`, async (error, response) => {
-                if (error) {
-                    return reject(error);
-                }
-
-                let parsedResponse;
-                try {
-                    parsedResponse = JSON.parse(response);
-                } catch (error) {
-                    reject(error);
-                }
-
-                return resolve(parsedResponse);
-            });
-        });
+    async getValue(key: string, ignorePrefix?: boolean) {
+        const fullKey = `${ignorePrefix ? '' : this.keyPrefix}${key}`;
+        try {
+            const response = await this.client.connection.get(fullKey);
+            if (response == null) return null;
+            return JSON.parse(response);
+        } catch (error) {
+            throw new RedisException(error);
+        }
     }
 
-    setValue(key: string, value: any, duration: number = this.defaultExpiration, ignorePrefix?: boolean) {
-        return new Promise<any>((resolve, reject) => {
+    async setValue(key: string, value: any, duration: number = this.defaultExpiration, ignorePrefix?: boolean) {
+        const fullKey = `${ignorePrefix ? '' : this.keyPrefix}${key}`;
+
+        try {
+            const stringValue = JSON.stringify(value);
             if (duration > 0) {
-                this.client.connection.set(
-                    `${ignorePrefix ? '' : this.keyPrefix}${key}`,
-                    JSON.stringify(value),
-                    'EX',
-                    duration,
-                    (err, response) => {
-                        if (err) {
-                            return reject(err);
-                        }
-                        return resolve(response);
-                    }
-                );
+                await this.client.connection.set(fullKey, stringValue, { EX: duration });
             } else {
-                this.client.connection.set(`${ignorePrefix ? '' : this.keyPrefix}${key}`, JSON.stringify(value), (err, response) => {
-                    if (err) {
-                        return reject(err);
-                    }
-                    return resolve(response);
-                });
+                await this.client.connection.set(fullKey, stringValue);
             }
-        });
+            return 'OK';
+        } catch (error) {
+            throw new RedisException(error);
+        }
     }
 
     async delete(key: string | string[], ignorePrefix?: boolean) {

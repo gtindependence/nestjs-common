@@ -33,7 +33,7 @@ export class RedisClient extends EventEmitter {
      * 3. Subscribe and emit the new connection's events
      * 4. Return the client
      */
-    async setupClient() {
+    setupClient() {
         // initial connection
         const self = this;
         const client = createClient({
@@ -42,7 +42,7 @@ export class RedisClient extends EventEmitter {
                     if (options.totalRetryTime > self.maxTotalRetryTime) {
                         self.emit('error', new Error('Retry time exhausted, creating new client connection...'));
 
-                        // cleanly end connection, then setup new client connection
+                        // cleanly end connection, then set up new client connection
                         client.quit();
                         self.connection = self.setupClient();
                         return;
@@ -62,7 +62,8 @@ export class RedisClient extends EventEmitter {
 
         this.emitClientEvents(client);
 
-        return await client.connect();
+        client.connect().catch(err => self.emit('error', err));
+        return client;
     }
 
     /**
