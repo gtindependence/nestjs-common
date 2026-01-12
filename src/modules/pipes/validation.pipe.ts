@@ -20,7 +20,7 @@ export class ValidationPipe implements PipeTransform<any> {
         }
         // Construct the class with the value if has not already been constructed
         const object = value instanceof ConstructedObject ? value.object : new metatype(value);
-        const errors = await validate(object);
+        const errors = await validate(object, { forbidUnknownValues: false });
         if (errors.length > 0) {
             throwValidationErrors(errors, markedCritical);
         }
