@@ -18,26 +18,19 @@ We are flipping the `Pagination` constructor so that you can utilize this class 
 ## Installation
 
 ```sh
-npm i @teammaestro/nestjs-common
+npm i @gtindependence/nestjs-common
 ```
 
 From there just add whatever you want to import into your Core/Common Modules
 
 ## Peer Dependencies
 
-There are several peer dependencies of this project. Once you install this package you will need to follow up and ensure the follow dependencies are installed:
+There are several peer dependencies of this project. Once you install this package you will need to follow up and ensure they are installed. See package.json for the full list and versions.
 
-```sh
-npm i @nestjs/common@^7.0 @nestjs/core@^7.0 @nestjs/passport@^7.0 @nestjs/testing@^7.0 @nestjs/microservices@^7.0 @nestjs/swagger class-validator@^0.12.2 config@^3.2 js-yaml@^3.0 log4js@^6.2 passport@^0.4 reflect-metadata@^0.1 rxjs@^6.5
-```
 
 ## Dev Dependencies
 
-There are also a few dev dependencies that you may want to add in order for typescript to compile correctly:
-
-```sh
-npm i --save-dev @types/config @types/raven
-```
+There are also a few dev dependencies that you may want to add in order for typescript to compile correctly. See package.json for the full list and versions.
 
 ## Configurations
 
@@ -186,7 +179,7 @@ export interface InjectableMetadata {
 To access this data in your DTO, you should redefine the InjectedDto type provided by this library and use your InjectableMetadata interface.
 
 ```ts
-import { InjectedDto as CommonInjectedDto } from '@teammaestro/nestjs-common';
+import { InjectedDto as CommonInjectedDto } from '@gtindependence/nestjs-common';
 import { InjectableMetadata } from './injectable-metadata';
 
 export type InjectedDto<DtoType, PickedFields extends keyof InjectableMetadata> = CommonInjectedDto<
@@ -200,7 +193,7 @@ Then in the DTO, use this as the type of the argument that is passed into the co
 appropriately typed on the `INJECTED_METADATA_KEY`.
 
 ```ts
-import { INJECTED_METADATA_KEY } from '@teammaestro/nestjs-common';
+import { INJECTED_METADATA_KEY } from '@gtindependence/nestjs-common';
 import { InjectedDto } from '../../common';
 
 export class AdminDto {

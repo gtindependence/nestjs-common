@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import * as EventEmitter from 'events';
+import { EventEmitter } from 'events';
 import { createClient } from 'redis';
 import { ApplicationTokens } from '../../application-tokens.const';
 import { RedisConfigurationOptions, RedisConfigurationToken } from '../redis-configuration';

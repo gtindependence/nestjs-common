@@ -1,6 +1,6 @@
 {
     "name": "@gtindependence/nestjs-common",
-    "version": "21.1.0",
+    "version": "22.0.0",
     "description": "Our common decorators, services, etc for NestJS projects",
     "keywords": [
         "Typescript",
@@ -32,13 +32,13 @@
         "postpack:dev": "npm run build && mkdir -p ./build && mv ./*.tgz ./build && echo \"\nPack file path:\n$(pwd)/build/$(ls -tp ./build | grep -v '/$' | head -n 1)\n\""
     },
     "peerDependencies": {
-        "@nestjs/common": "^9.4.3",
-        "@nestjs/core": "^9.4.3",
-        "@nestjs/microservices": "^9.4.3",
-        "@nestjs/passport": "^9.0.3",
-        "@nestjs/testing": "^9.4.3",
-        "@nestjs/swagger": "^6.3.0",
         "@gtindependence/node-common": "^6.0.0",
+        "@nestjs/common": "^10.4.21",
+        "@nestjs/core": "^10.4.21",
+        "@nestjs/microservices": "^10.4.21",
+        "@nestjs/passport": "^10.0.3",
+        "@nestjs/swagger": "^7.4.2",
+        "@nestjs/testing": "^10.4.21",
         "class-validator": "^0.14.0",
         "config": "^3.3.9",
         "js-yaml": "^4.1.0",
@@ -49,14 +49,15 @@
     },
     "devDependencies": {
         "@gtindependence/node-common": "^6.0.0",
-        "@nestjs/common": "^9.4.3",
-        "@nestjs/core": "^9.4.3",
-        "@nestjs/microservices": "^9.4.3",
-        "@nestjs/passport": "^9.0.3",
-        "@nestjs/swagger": "^6.3.0",
-        "@nestjs/testing": "^9.4.3",
+        "@nestjs/axios": "^3.1.3",
+        "@nestjs/common": "^10.4.21",
+        "@nestjs/core": "^10.4.21",
+        "@nestjs/microservices": "^10.4.21",
+        "@nestjs/passport": "^10.0.3",
+        "@nestjs/swagger": "^7.4.2",
+        "@nestjs/testing": "^10.4.21",
         "@types/config": "^3.3.1",
-        "@types/node": "^18.17.1",
+        "@types/node": "^20.19.27",
         "@types/passport": "~1.0.13",
         "@types/raven": "^2.5.5",
         "@types/redis": "^2.8.32",
@@ -69,7 +70,7 @@
         "reflect-metadata": "~0.1.13",
         "rxjs": "^7.8.1",
         "tslint": "^6.1.3",
-        "typescript": "^4.4"
+        "typescript": "^5.9.3"
     },
     "dependencies": {
         "redis": "4.6.10"
