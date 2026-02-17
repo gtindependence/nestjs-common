@@ -42,7 +42,7 @@ application:
     port: 8080
     apiPrefix: '/api'
 
-raven:
+sentry:
     dsn: 'https://logger.sentry.io/31'
 
 authentication:
