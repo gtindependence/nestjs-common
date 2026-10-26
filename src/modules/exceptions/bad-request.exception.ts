@@ -3,7 +3,7 @@ import { PassiveException } from './passive.exception';
 
 export class BadRequestException extends PassiveException {
     constructor(
-        message?: any,
+        message?: string | object,
         options?: {
             appCode?: string;
         }

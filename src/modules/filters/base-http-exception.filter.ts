@@ -11,9 +11,9 @@ export class BaseHttpExceptionFilter {
     ) {
     }
 
-    getInitialException(exception: any) {
-        // use 405 instead of 403 do to cloud front's handling of forbidden
-        if (exception.status === HttpStatus.FORBIDDEN) {
+    getInitialException<T extends object>(exception: T) {
+        // use 405 instead of 403 due to cloud front's handling of forbidden
+        if ('status' in exception && exception.status === HttpStatus.FORBIDDEN) {
             exception.status = HttpStatus.METHOD_NOT_ALLOWED;
         }
         return exception;
@@ -31,7 +31,7 @@ export class BaseHttpExceptionFilter {
         return 'rpc';
     }
 
-    handleRpcException(exception: any, host: ArgumentsHost, logException: boolean) {
+    handleRpcException(exception: Error, host: ArgumentsHost, logException: boolean) {
         const context = host.switchToRpc().getContext<ActivemqMicroserviceContext>();
 
         if (context.rpcType === 'ACTIVE_MQ') {
@@ -39,7 +39,7 @@ export class BaseHttpExceptionFilter {
                 this.errorHandler.captureException(exception);
             }
 
-            return throwError(exception);
+            return throwError(() => exception);
         } else {
             return EMPTY;
         }

@@ -1,7 +1,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 import { Response, Request } from 'express';
-import { BaseHttpExceptionFilter } from './base-http-exception.filter';
 import { RedirectException } from '../exceptions';
+import { BaseHttpExceptionFilter } from './base-http-exception.filter';
 
 @Catch(RedirectException)
 export class RedirectHttpExceptionFilter extends BaseHttpExceptionFilter implements ExceptionFilter {

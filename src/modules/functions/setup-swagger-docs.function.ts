@@ -1,6 +1,6 @@
+import { join } from 'path';
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
-import { join } from 'path';
 import { writeJson } from './write-json.function';
 
 export async function setupSwaggerDocs(

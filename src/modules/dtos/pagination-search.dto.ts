@@ -1,11 +1,13 @@
 import { IsOptional } from 'class-validator';
-import { Pagination } from './pagination.dto';
 import { HiveApiModelProperty } from '../decorators';
 import { PaginationOptions } from '../interfaces';
+import { Pagination } from './pagination.dto';
+
 
 export class PaginationSearch extends Pagination {
     @HiveApiModelProperty(`Term to search by`)
     @IsOptional()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Heavy usage, not easy to type
     search: string | any;
 
     searchTerm: string;

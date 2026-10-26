@@ -1,9 +1,19 @@
 import { AxiosError } from 'axios';
 
+export interface AxiosExceptionOriginal {
+    config: AxiosError['config'];
+    response: {
+        status: number;
+        statusText: string;
+        headers: unknown;
+        data: unknown;
+    };
+}
+
 export class AxiosExceptionError extends Error {
     message: string;
     stack: string;
-    original: any;
+    original?: AxiosExceptionOriginal;
 
     constructor(error: AxiosError) {
         super();

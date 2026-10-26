@@ -1,8 +1,8 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { RedisClientOptions } from '@redis/client';
 import { RedisProvider } from '../providers';
 import { getRedisConfigurationProvider } from '../providers';
 import { RedisService } from '../services';
-import { RedisClientOptions } from '@redis/client';
 
 @Module({
     providers: [

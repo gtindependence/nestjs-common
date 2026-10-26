@@ -1,11 +1,12 @@
-import { Inject, Injectable } from '@nestjs/common';
 import { EventEmitter } from 'events';
+import { Inject, Injectable } from '@nestjs/common';
 import { createClient } from 'redis';
 import { ApplicationTokens } from '../../application-tokens.const';
 import { RedisConfigurationOptions, RedisConfigurationToken } from '../redis-configuration';
 
 @Injectable()
 export class RedisClient extends EventEmitter {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     connection: any;
 
     private pingRate: number;
@@ -35,16 +36,16 @@ export class RedisClient extends EventEmitter {
      */
     setupClient() {
         // initial connection
-        const self = this;
         const client = createClient({
             socket: {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 reconnectStrategy: (options: any) => {
-                    if (options.totalRetryTime > self.maxTotalRetryTime) {
-                        self.emit('error', new Error('Retry time exhausted, creating new client connection...'));
+                    if (options.totalRetryTime > this.maxTotalRetryTime) {
+                        this.emit('error', new Error('Retry time exhausted, creating new client connection...'));
 
                         // cleanly end connection, then set up new client connection
                         client.quit();
-                        self.connection = self.setupClient();
+                        this.connection = this.setupClient();
                         return;
                     }
 
@@ -62,7 +63,7 @@ export class RedisClient extends EventEmitter {
 
         this.emitClientEvents(client);
 
-        client.connect().catch(err => self.emit('error', err));
+        client.connect().catch(err => this.emit('error', err));
         return client;
     }
 
@@ -72,7 +73,7 @@ export class RedisClient extends EventEmitter {
      * classes events, instead of resubscribing to every new connection created.
      * @param client
      */
-    private emitClientEvents(client: any) {
+    private emitClientEvents(client: ReturnType<typeof createClient>) {
         client.on('error', error => this.emit('error', error));
         client.on('ready', () => this.emit('ready'));
         client.on('reconnecting', () => this.emit('reconnecting'));

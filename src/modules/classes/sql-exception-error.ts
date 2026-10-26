@@ -1,9 +1,9 @@
-import { SequelizeError } from '../interfaces';
+import { SequelizeError, SequelizeOriginalError } from '../interfaces';
 
 export class SqlExceptionError extends Error {
     message: string;
     stack: string;
-    original: any;
+    original: SequelizeOriginalError;
 
     constructor(error: SequelizeError) {
         super();

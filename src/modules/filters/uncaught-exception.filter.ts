@@ -9,9 +9,15 @@ const ignoredHttpStatuses = [
     HttpStatus.PAYLOAD_TOO_LARGE
 ];
 
+interface UncaughtException extends Error {
+    status?: number;
+    appCode?: string;
+    customResponse?: object;
+}
+
 @Catch()
 export class UncaughtExceptionFilter extends BaseHttpExceptionFilter implements ExceptionFilter {
-    catch(exception: any, host: ArgumentsHost) {
+    catch(exception: UncaughtException, host: ArgumentsHost) {
         // get the original exception if it was caught more than once
         exception = this.getInitialException(exception);
 
@@ -29,9 +35,10 @@ export class UncaughtExceptionFilter extends BaseHttpExceptionFilter implements 
 
             const statusCode = exception.status || 500;
 
-            let message;
-            if (exception.message) {
-                message = exception.message.error || exception.message;
+            const rawMessage: unknown = exception.message;
+            let message: unknown;
+            if (rawMessage) {
+                message = (typeof rawMessage === 'object' && 'error' in rawMessage && rawMessage.error) || rawMessage;
             } else {
                 message = 'There was an internal server error';
             }

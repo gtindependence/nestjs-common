@@ -1,6 +1,6 @@
 import { getFromContainer, MetadataStorage, ValidationTypes } from 'class-validator';
 
-// tslint:disable-next-line:ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function getValidation(targetConstructor: Function, propertyKey: string): ValidationTypes[] {
     const validatorStorage: MetadataStorage = getFromContainer(MetadataStorage);
 
