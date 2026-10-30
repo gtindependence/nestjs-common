@@ -21,7 +21,7 @@ export const InjectMetadata = (reqProperty?: string, ...injectFunctions: (
             Query(DO_NOT_VALIDATE)(target, property, index);
         }
         // create a nest parameter decorator that will have access to the request object
-        createParamDecorator((data, ctx: ExecutionContext): any => {
+        createParamDecorator((data, ctx: ExecutionContext): unknown => {
             const req = ctx.switchToHttp().getRequest();
             // if property is not a object, return that value
             if (!reqProperty || typeof req[reqProperty] !== 'object') {

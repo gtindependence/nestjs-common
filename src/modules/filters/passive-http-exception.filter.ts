@@ -1,7 +1,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
-import { BaseHttpExceptionFilter } from './base-http-exception.filter';
 import { PassiveException } from '../exceptions/passive.exception';
+import { BaseHttpExceptionFilter } from './base-http-exception.filter';
 
 @Catch(PassiveException)
 export class PassiveHttpExceptionFilter extends BaseHttpExceptionFilter implements ExceptionFilter {

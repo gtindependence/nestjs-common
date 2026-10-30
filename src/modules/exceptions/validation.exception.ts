@@ -3,7 +3,7 @@ import { LoggedException } from './logged.exception';
 
 export class ValidationException extends LoggedException {
     constructor(
-        message?: string,
+        message?: string | object,
         options?: {
             appCode?: string;
             critical?: boolean;
@@ -11,7 +11,7 @@ export class ValidationException extends LoggedException {
     ) {
         super('ValidationException', message || 'Request format is invalid', HttpStatus.BAD_REQUEST);
 
-        this.tags.critical = !!options?.critical ? 'true' : 'false';
+        this.tags.critical = options?.critical ? 'true' : 'false';
 
         if (options?.appCode) {
             this.appCode = options.appCode;

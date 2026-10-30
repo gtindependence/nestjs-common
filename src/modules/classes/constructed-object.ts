@@ -1,5 +1,5 @@
 export class ConstructedObject {
 
-    constructor(public readonly object: any) {
+    constructor(public readonly object: unknown) {
     }
 }

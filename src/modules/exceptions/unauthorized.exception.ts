@@ -3,7 +3,7 @@ import { PassiveException } from './passive.exception';
 
 export class UnauthorizedException extends PassiveException {
     constructor(
-        message?: any,
+        message?: string | object,
         options?: {
             appCode?: string;
         }

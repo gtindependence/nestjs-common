@@ -5,7 +5,7 @@ import { DO_NOT_VALIDATE } from '../constants';
 import { throwValidationErrors } from '../utility';
 
 @Injectable()
-export class ValidationPipe implements PipeTransform<any> {
+export class ValidationPipe implements PipeTransform<unknown> {
     async transform(value, metadata: ArgumentMetadata) {
         const { metatype, data } = metadata;
         if (!metatype || (!this.toValidate(metatype) && !(value instanceof ConstructedObject))) {

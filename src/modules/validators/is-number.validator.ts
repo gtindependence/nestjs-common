@@ -1,21 +1,20 @@
-import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import { registerDecorator, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 
 @ValidatorConstraint()
 export class IsNumberConstraint implements ValidatorConstraintInterface {
 
-    validate(number: any) {
-        return !isNaN(number);
+    validate(number: unknown) {
+        return !isNaN(Number(number));
     }
 
-    defaultMessage(args: ValidationArguments) {
+    defaultMessage() {
       return `$property must be a number.`;
     }
 
 }
 
 export function IsNumber(validationOptions?: ValidationOptions) {
-   // tslint:disable-next-line:ban-types
-   return (object: Object, propertyName: string) => {
+   return (object: object, propertyName: string) => {
         registerDecorator({
             target: object.constructor,
             propertyName,

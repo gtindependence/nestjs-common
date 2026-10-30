@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
-import { LoggedException } from './logged.exception';
 import { SqlExceptionError } from '../classes';
 import { SequelizeError } from '../interfaces';
+import { LoggedException } from './logged.exception';
 
 export class SqlException extends LoggedException {
     constructor(error: SequelizeError, customMessage?: string) {

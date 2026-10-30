@@ -32,10 +32,10 @@ export class Pagination {
     sortDir: SortDirection;
 
     offset: number;
-    sortByModel: any;
+    sortByModel: unknown;
     defaultSort: string;
 
-    secondarySort?: any;
+    secondarySort?: unknown;
 
     static defaultSortDir: SortDirection = 'DESC';
 

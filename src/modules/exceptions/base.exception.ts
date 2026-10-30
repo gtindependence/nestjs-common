@@ -1,9 +1,7 @@
 import { HttpException } from "@nestjs/common";
 
 export class BaseException extends HttpException {
-    customResponse: {
-        [key: string]: any;
-    };
+    customResponse: object;
 
     tags: {
         [key: string]:
@@ -18,7 +16,7 @@ export class BaseException extends HttpException {
 
     error: Error;
 
-    loggedMetadata: any;
+    loggedMetadata: Record<string, unknown>;
 
     // This will be exposed in responses by the Filters
     appCode?: string;

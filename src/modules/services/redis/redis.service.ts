@@ -18,7 +18,6 @@ export class RedisService {
 
         private readonly errorHandler: ErrorHandler
     ) {
-        // tslint:disable
         this.client.on('error', error => this.errorHandler.captureException(new RedisException(error)));
         this.client.on('ready', () => this.errorHandler.captureBreadcrumb({ message: 'Connected to Redis' }));
         this.client.on('reconnecting', () =>
@@ -27,7 +26,6 @@ export class RedisService {
         this.client.on('end', () =>
             this.errorHandler.captureException(new RedisException(new Error('Redis Connection Fatal')))
         );
-        // tslint:enable
 
         this.defaultExpiration = this.redisConfiguration.expiration ?? 86400;
         this.keyPrefix = this.redisConfiguration.keyPrefix ?? '';
@@ -44,7 +42,7 @@ export class RedisService {
         }
     }
 
-    async setValue(key: string, value: any, duration: number = this.defaultExpiration, ignorePrefix?: boolean) {
+    async setValue(key: string, value: unknown, duration: number = this.defaultExpiration, ignorePrefix?: boolean) {
         const fullKey = `${ignorePrefix ? '' : this.keyPrefix}${key}`;
 
         try {

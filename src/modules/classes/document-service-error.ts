@@ -1,9 +1,11 @@
+import { AxiosExceptionOriginal } from './axios-exception-error';
+
 export class DocumentServiceExceptionError extends Error {
     message: string;
     stack: string;
-    original: any;
+    original?: AxiosExceptionOriginal;
 
-    constructor(error: any) {
+    constructor(error: Error & { original?: AxiosExceptionOriginal }) {
         super();
 
         if (error) {
