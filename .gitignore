@@ -3,4 +3,5 @@ node_modules
 *.d.ts
 *.tgz
 .idea/
+.npmrc
 modules/
