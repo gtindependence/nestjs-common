@@ -4,4 +4,4 @@ node_modules
 *.tgz
 .idea/
 .npmrc
-modules/
+/modules/

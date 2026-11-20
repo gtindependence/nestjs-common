@@ -26,11 +26,11 @@
         "modules/**/*.d.ts"
     ],
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "vitest run",
         "watch": "tsc -w",
         "start": "npm run watch",
         "clean": "rm -f *.js && rm -f *.d.ts && rm -Rf modules",
-        "build": "npm run clean && tsc -d",
+        "build": "npm run clean && tsc -p tsconfig.build.json -d",
         "prepack": "npm run lint && npm run build",
         "postpack": "npm run clean",
         "postpublish": "git push && git push --tags",
@@ -84,7 +84,8 @@
         "reflect-metadata": "~0.1.13",
         "rxjs": "^7.8.1",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.72.0"
+        "typescript-eslint": "^8.72.0",
+        "vitest": "^5.1.1"
     },
     "dependencies": {
         "redis": "4.6.10"
